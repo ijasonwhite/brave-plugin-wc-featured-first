@@ -41,7 +41,7 @@ if (!function_exists('brave_get_featured_product_ids')) {
         $featured_products_ids = array_reverse( $featured_products_ids );
         $filtered_featured_products_ids = apply_filters( 'brave_featured_products_ids', $featured_products_ids );
 
-        set_transient( 'brave_featured_products_ids', $filtered_featured_products_ids, DAY_IN_SECONDS * 30 );
+        set_transient( 'brave_featured_products_ids', $filtered_featured_products_ids, (DAY_IN_SECONDS / 24) ); // one hour cache
 
 
         return apply_filters( 'brave_featured_products_ids_sort', $filtered_featured_products_ids );
