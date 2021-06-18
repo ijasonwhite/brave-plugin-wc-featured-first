@@ -27,7 +27,7 @@ if (!function_exists('brave_get_featured_product_ids')) {
                 'post_type'      => array( 'product', 'product_variation' ),
                 'posts_per_page' => -1,
                 'post_status'    => 'publish',
-                'tax_query'      => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
+                'tax_query'      => array( 
                     array(
                         'taxonomy' => 'product_visibility',
                         'field'    => 'term_taxonomy_id',
