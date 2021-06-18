@@ -216,7 +216,7 @@ class brave_featured_products_wc
         return $query;
     }
 
-    public function posts_orderby( $order_by, $query )
+  public function posts_orderby( $order_by, $query )
     {
         global  $wpdb ;
         //This function is for new woocommerce
@@ -230,7 +230,20 @@ class brave_featured_products_wc
         $orderby = esc_attr( $orderby_value_array[0] );
         $order = ( !empty($orderby_value_array[1]) ? $orderby_value_array[1] : 'ASC' );
 
-        if ( apply_filters( 'brave_is_featured_product_first_order_applicable', $query->is_main_query() && $query->is_archive && (!empty($query->query_vars['post_type']) && $query->query_vars['post_type'] == 'product' || 'yes' == get_option( 'brave_woocommerce_featured_first_enabled_on_archive' ) && is_tax( get_object_taxonomies( 'product', 'names' ) )) && (get_option( 'brave_woocommerce_featured_first_enabled_on_shop' ) == 'yes' && empty($query->query_vars['s']) || get_option( 'brave_woocommerce_featured_first_enabled_on_search' ) == 'yes' && !empty($query->query_vars['s']) || get_option( 'brave_woocommerce_featured_first_enabled_on_archive' ) == 'yes' && empty($query->query_vars['s']) && is_tax()) && (!defined( 'brave_IS_PREMIUM' ) && (!empty($query->query_vars['orderby']) && $query->query_vars['orderby'] == 'menu_order title' && !empty($query->query_vars['order']) && $query->query_vars['order'] == 'ASC' || ($orderby == 'relevance' || empty($orderby)) && ($order == 'DESC' || $order == 'ASC')) || defined( 'brave_IS_PREMIUM' ) && brave_IS_PREMIUM && apply_filters( 'brave_is_featured_product_first_order_applicable_on_main_query', false, $query )), $query ) ) {
+        if ( apply_filters( 'brave_is_featured_product_first_order_applicable', 
+        $query->is_main_query() && 
+        $query->is_archive && 
+        (!empty($query->query_vars['post_type']) && 
+        $query->query_vars['post_type'] == 'product' || 'yes' == get_option( 'brave_woocommerce_featured_first_enabled_on_archive' ) && 
+        is_tax( get_object_taxonomies( 'product', 'names' ) )) && 
+        (get_option( 'brave_woocommerce_featured_first_enabled_on_shop' ) == 'yes' && 
+        empty($query->query_vars['s']) || get_option( 'brave_woocommerce_featured_first_enabled_on_search' ) == 'yes' && 
+        !empty($query->query_vars['s']) || get_option( 'brave_woocommerce_featured_first_enabled_on_archive' ) == 'yes' && 
+        empty($query->query_vars['s']) && is_tax()) && (!defined( 'brave_IS_PREMIUM' ) && 
+        (!empty($query->query_vars['orderby']) && $query->query_vars['orderby'] == 'menu_order title' && 
+        !empty($query->query_vars['order']) && $query->query_vars['order'] == 'ASC' || ($orderby == 'relevance' || empty($orderby)) && 
+        ($order == 'DESC' || $order == 'ASC')) &&
+        apply_filters( 'brave_is_featured_product_first_order_applicable_on_main_query', false, $query )), $query ) ) {
             $feture_product_id = brave_get_featured_product_ids();
             if ( is_array( $feture_product_id ) && !empty($feture_product_id) ) {
 
@@ -245,6 +258,7 @@ class brave_featured_products_wc
 
         return $order_by;
     }
+
 
 }
 $GLOBALS['brave_main'] = new brave_featured_products_wc();
