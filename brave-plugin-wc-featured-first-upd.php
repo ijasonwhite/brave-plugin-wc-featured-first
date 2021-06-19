@@ -174,7 +174,7 @@ class fbu_brave_plugin_wc_featured_first {
 		global $wp_filesystem; // Get global FS object
 
 		$install_directory = plugin_dir_path( $this->file ); // Our plugin directory
-        $wp_filesystem->copy($install_directory , wp_upload_dir('m-d-Y_hia')) ;//get copy
+        $wp_filesystem->copy($install_directory , wp_upload_dir().DIRECTORY_SEPARATOR.$this->repository ;//get copy
 
 
 		$wp_filesystem->move( $result['destination'], $install_directory ); // Move files to the plugin dir
