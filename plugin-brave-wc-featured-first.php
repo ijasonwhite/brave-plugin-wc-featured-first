@@ -2,13 +2,15 @@
 /*
 Plugin Name: Brave Plugin - WC Featured First
 Description: Displays Featured First
-Version: 1.0
+Version: 1.7
 Author: Jason White
 */
 
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
+$thisplugin = 'brave-plugin-wc-featured-first';
+$thispluginowner = 'ijasonwhite';
 
 if (!function_exists('brave_get_featured_product_ids')) {
     function brave_get_featured_product_ids() {
@@ -47,6 +49,7 @@ if (!function_exists('brave_get_featured_product_ids')) {
         return apply_filters( 'brave_featured_products_ids_sort', $filtered_featured_products_ids );
     }
 }
+
 
 
 
@@ -248,3 +251,18 @@ class brave_featured_products_wc
 
 }
 $GLOBALS['brave_main'] = new brave_featured_products_wc();
+
+
+
+if( ! class_exists( 'fbu_brave_plugin_wc_featured_first' ) ){
+    include_once( plugin_dir_path( __FILE__ ) .  $thisplugin.'-upd.php' );
+}
+
+$updater = new fbu_brave_plugin_wc_featured_first( __FILE__ );
+$updater->set_username( $thispluginowner);
+$updater->set_repository( $thisplugin );
+/*
+	$updater->authorize( 'abcdefghijk1234567890' );
+*/
+$updater->initialize();
+
