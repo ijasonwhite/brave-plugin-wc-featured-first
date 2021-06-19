@@ -2,7 +2,7 @@
 /*
 Plugin Name: Brave Plugin - WC Featured First
 Description: Displays Featured First
-Version: 1.7
+Version: 1.8
 Author: Jason White
 */
 
